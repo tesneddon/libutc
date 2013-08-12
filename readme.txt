@@ -9,7 +9,7 @@
   --
 
   The developers of this software would like to acknowledge the efforts
-  of the developers involved in developing the UTC API code libutc use.
+  of the people involved in creating the UTC API code that libutc uses.
   The code is derived from FreeDCE, which is the reference implementation
   of the DCE specification published by the Open Group which appears to be
   built using the DECnet/OSI DTSS services developed by Digital Equipment
