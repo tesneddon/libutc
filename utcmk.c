@@ -51,7 +51,7 @@ int utc_mkbintime(utc_t *utc,
     UTCadd(&timevalue, &diff_UNIX_UTC_ticks, &timevalue);
 
     return utc_mkcomptime(utc, &timevalue, &inaccvalue, tdf);
-}
+} /* utc_mkbintime */
 
 /*
  *++
@@ -143,4 +143,5 @@ int utc_mkcomptime(utc_t *utc,
     memcpy((pointer_t)utc, (pointer_t)&autc, sizeof(utc_t));
 
     return 0;
-}
+} /* utc_mkcomptime */
+
