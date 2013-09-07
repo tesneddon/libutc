@@ -32,7 +32,7 @@
 **--
 */
 #include <time.h>
-#include <utc.h>
+#include "utc_arith.h"
 
 /*
 **  Forward declarations
