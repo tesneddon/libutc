@@ -8,8 +8,8 @@
  *		adapted from QUAD.H
  *		
  */
-#ifndef utc_h__
-#define utc_h__
+#ifndef utc_arith_h__
+#define utc_arith_h__
 #include <limits.h>
 
 /*
@@ -216,4 +216,4 @@
 #endif  /* LONG_BIT == 32 */
 #endif	/* LONG_BIT >= 64 */
 
-#endif /* utc_h__ */
+#endif /* utc_arith_h__ */
