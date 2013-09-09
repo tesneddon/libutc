@@ -170,4 +170,23 @@ typedef unsigned64      ExtTDF, ExtInacc;
 #define LITTLE_ENDIAN_FLAG      (0 * ENDIAN_FLAG_MASK)
 #define BIG_ENDIAN_FLAG         (1 * ENDIAN_FLAG_MASK)
 
+#define UTC_WDAY (1)
+#define GREGORIAN_OFFSET (1581*365 + 1581/4 - 1581/100 + 1581/400 + 273 + 15)
+#define JULIAN_OFFSET (1581*365 + 1581/4 + 273 + 5)
+
+/*
+ * Determine if the specified year is (was) a leap year
+ */
+
+#ifdef IsLeapYear
+#undef IsLeapYear
+#endif
+
+#define IsLeapYear(year)                                                \
+    ( ((year) > 1582) ?                                                 \
+                ( (((year) % 4 == 0) && ((year) % 100 != 0)) ||         \
+                  ((year) % 400 == 0) ) :                               \
+                ( (year) % 4 == 0 ) )
+
+
 #endif /* utc_priv_h__ */
