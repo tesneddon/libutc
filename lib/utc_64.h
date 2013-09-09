@@ -74,7 +74,7 @@
 
 #define U64SET(d,s)     ( (d) = (s) )
 #define U64SET32(d,l)   ( (d) = ((l) & 0x00000000ffffffff) )
-#define U64SET64(d,h,l) ( (d) = (((h) << 32) | ((l) & 0x00000000ffffffff)) )
+#define U64SET64(d,h,l) ( (d) = (((long)(h) << 32) | ((l) & 0x00000000ffffffff)) )
 #define U64GET64(h,l,s) ( (h) = ((s)>>32), U64SET32(l,s))
 
 #define U64ZERO(d)      U64SET(d,0)
