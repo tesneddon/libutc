@@ -1,65 +1,42 @@
 /*
- * @OSF_COPYRIGHT@
- * COPYRIGHT NOTICE
- * Copyright (c) 1990, 1991, 1992, 1993, 1994, 1996 Open Software Foundation, Inc.
- * ALL RIGHTS RESERVED (DCE).  See the file named COPYRIGHT.DCE in the
- * src directory for the full copyright text.
- */
-/*
- * HISTORY
- * $Log: dce64.h,v $
- * Revision 1.1.4.2  1996/02/18  23:32:57  marty
- * 	Update OSF copyright years
- * 	[1996/02/18  22:20:57  marty]
- *
- * Revision 1.1.4.1  1995/12/08  21:37:06  root
- * 	Submit OSF/DCE 1.2.1
- * 	[1995/12/08  18:08:58  root]
- * 
- * Revision 1.1.2.7  1994/09/23  19:59:59  tom
- * 	Back out change of unsigned/signed64 to typedef hyper
- * 	[1994/09/23  19:26:46  tom]
- * 
- * Revision 1.1.2.5  1994/09/21  22:01:37  tom
- * 	Add u64_to_hyper and hyper_to_u64 for dts use.
- * 	[1994/09/21  21:14:16  tom]
- * 
- * Revision 1.1.2.4  1994/08/23  20:31:42  cbrooks
- * 	Code Cleanup
- * 	[1994/08/19  17:52:19  cbrooks]
- * 
- * Revision 1.1.2.3  1994/08/16  18:12:42  cbrooks
- * 	Move U64IMUL, U64IDIV to utc_arith.h
- * 	[1994/08/16  17:51:40  cbrooks]
- * 
- * 	CR11494 - 64 bit changes
- * 	[1994/08/16  13:09:00  cbrooks]
- * 
- * 	More 64bit changes for 32bit machines
- * 	[1994/08/15  18:49:14  cbrooks]
- * 
- * 	64Bit changes - macro updates
- * 	[1994/08/12  18:57:42  cbrooks]
- * 
- * 	CR11494 - 64bit changes
- * 	[1994/08/09  18:44:15  cbrooks]
- * 
- * Revision 1.1.2.2  1994/03/17  17:45:14  bowe
- * 	Add Transarc copyright and assumptions comment.
- * 	[1994/03/17  16:48:26  bowe]
- * 
- * Revision 1.1.2.1  1994/03/16  21:56:56  bowe
- * 	Surround file with #ifndef
- * 	[1994/03/16  21:54:24  bowe]
- * 
- * 	Initial checkin
- * 	[1994/03/16  21:21:44  bowe]
- * 
- * $EndLog$
- */
-
-/* Copyright (C) 1991, 1990 Transarc Corporation - All rights reserved. */
-
+**++
+**  FACILITY:   libutc
+**
+**  ABSTRACT:   64-bit definitions
+**
+**  MODULE DESCRIPTION:
+**
+**      This module contains macros for handling 64-bit values (especially
+**  useful for 32-bit platforms).
+**
+**  AUTHOR:     Tim E. Sneddon (from DCE source)
+**
+**  Copyright (c) 1990-19944, 1996 Open Software Foundation, Inc.
+**  ALL RIGHTS RESERVED (DCE).  See the file named COPYING for the full
+**  copyright text.
+**  Copyright (C) 1991, 1990 Transarc Corporation - All rights reserved.
+**  Copyright (c) 2013, Endless Software Solutions.
+**
+**  libutc is free software: you can redistribute it and/or modify
+**  it under the terms of the GNU General Public License as published by
+**  the Free Software Foundation, either version 3 of the License, or
+**  (at your option) any later version.
+**
+**  libutc is distributed in the hope that it will be useful,
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**  GNU General Public License for more details.
+**
+**  You should have received a copy of the GNU General Public License
+**  along with Foobar.  If not, see <http://www.gnu.org/licenses/>
+**
+**  CREATION DATE:  09-SEP-2013
+**
+**  MODIFICATION HISTORY:
+**
+**      09-SEP-2013 V1.0    Sneddon     Initial coding, built from DCE code.
+**--
+*/
 #ifndef utc_64_h__
 #define utc_64_h__
 #include <limits.h>
