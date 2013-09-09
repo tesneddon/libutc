@@ -13,10 +13,15 @@ dnl
 dnl You should have received a copy of the GNU General Public License
 dnl along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
+# Initialization...
+#
 AC_PREREQ([2.68])
 AC_INIT([libutc], [0.1], [libutc-bugs@endlesssoftware.com.au],,
 	 [http://endlesssoftware.com.au/libutc])
+
 AM_INIT_AUTOMAKE
+AM_SILENT_RULES([yes])
+
 LT_PREREQ([2.2])
 LT_INIT([dlopen])
 
@@ -30,18 +35,21 @@ AC_CONFIG_FILES([Makefile
 AC_PROG_CC
 AC_PROG_INSTALL
 
-# Checks for libraries.
-
 # Checks for header files.
-AC_CHECK_HEADERS([limits.h])
+AC_CHECK_HEADERS([endian.h limits.h time.h sys/time.h])
 
-# Checks for typedefs, structures, and compiler characteristics.
+# Determine size of LONG_BIT which is required by the internal API for
+# performing 64-bit math.
+#
+AC_COMPUTE_INT([long_bit], [ sizeof(long) * CHAR_BIT ],
+	       [#include <limits.h>],
+               AC_MSG_ERROR([Unable to determine word size in bits; LONG_BIT]))
+AC_DEFINE_UNQUOTED([LONG_BIT], [$long_bit],
+		   [Define to the machine word size.])
 
-# Checks for library functions.
+# Check for the following library functions
+#
 AC_CHECK_FUNCS([gettimeofday])
-
-# Options
-AM_SILENT_RULES
 
 AC_OUTPUT
 

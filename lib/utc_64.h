@@ -39,10 +39,8 @@
 */
 #ifndef utc_64_h__
 #define utc_64_h__
+#include "config.h"
 #include <limits.h>
-#ifndef LONG_BIT
-# define LONG_BIT (sizeof(unsigned long) * CHAR_BIT)
-#endif
 
 /*
  * ASSUMPTIONS throughout:

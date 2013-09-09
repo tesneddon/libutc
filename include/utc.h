@@ -1,5 +1,6 @@
 #ifndef utc_h__
-#define utf_h__
+#define utc_h__
+#include <time.h>
 
 #ifndef _UTC_T_
 #define _UTC_T_
