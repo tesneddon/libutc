@@ -32,6 +32,7 @@
 **      15-AUG-2013  V1.0    Sneddon	Initial coding.
 **--
 */
+#include <string.h>
 #include "utc_priv.h"
 
 /*
@@ -185,7 +186,7 @@ int utc_mkcomptime(utc_t *utc,
 #endif  /* LONG_BIT */
 #endif  /* (BYTE_ORDER == BIG_ENDIAN) */
 
-    memcpy((pointer_t)utc, (pointer_t)&autc, sizeof(utc_t));
+    memcpy(utc, &autc, sizeof(utc_t));
 
     return 0;
 } /* utc_mkcomptime */
