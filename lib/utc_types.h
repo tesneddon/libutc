@@ -34,10 +34,14 @@
 #ifndef utc_types_h__
 #define utc_types_h__
 
+#if LONG_BIT >= 64
+    typedef unsigned long unsigned64;
+#else
     typedef struct unsigned64_s_t {
     	unsigned long hi;
     	unsigned long lo;
     } unsigned64;
+#endif /* LONG_BIT */
 
     typedef struct signed64_s_t {
     	unsigned long hi;
