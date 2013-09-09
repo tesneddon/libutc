@@ -10,16 +10,13 @@
  */
 #ifndef utc_arith_h__
 #define utc_arith_h__
-#include <limits.h>
+#include "utc_64.h"
 
 /*
  * All macros work on the datatype UTCValue.  All macros require POINTERS
  * to UTCValues as parameters.  Pointers are used so these macros can be 
  * converted to functions at a later date if that's deemed desireable for the
  * underlying hardware.
- *
- * All macros, that are not defined here, are defined in 
- * src/dce/utils/misc/dce64.h file.
  */ 
 
 #define IsUTCzero(utc)	U64ISZERO (*(utc))
