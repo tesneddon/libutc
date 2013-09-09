@@ -32,8 +32,7 @@
 **      15-AUG-2013  V1.0    Sneddon	Initial coding.
 **--
 */
-#include <time.h>
-#include <utc.h>
+#include "utc_priv.h"
 
 /*
 **  Forward declarations
