@@ -38,6 +38,8 @@
 #include <sys/time.h>
 #include <time.h>
 #include <utc.h>
+#include "utc_arith.h"
+#include "utc_time.h"
 #include "utc_types.h"
 
 /*
