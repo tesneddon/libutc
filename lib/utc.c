@@ -31,7 +31,9 @@
 **      15-AUG-2013  V1.0    Sneddon    Initial coding.
 **--
 */
+#include <sys/time.h>
 #include <time.h>
+#include <utc.h>
 #include "utc_arith.h"
 
 /*
@@ -46,7 +48,7 @@ int utc_gettime(utc_t *utc) {
     struct timezone tz;
     struct timespec ts;
 
-    gettimeofday(&tv, &rz);
+    gettimeofday(&tv, &tz);
     ts.tv_sec = tv.tv_sec;
     ts.tv_nsec = tv.tv_usec * 1000;
 
