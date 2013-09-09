@@ -34,26 +34,13 @@
 */
 #include "utc_priv.h"
 
-/*
-**  Differences in base times in 100ns
-*/
     UTCValue diff_UNIX_UTC_ticks = UTCinit(0x13814000UL,0x01b21dd2UL);
     UTCValue diff_UTC_UNIX_ticks = UTCinit(0xec7ec000UL,0xfe4de22dUL);
-
-/*
-**  Differences in base times in seconds
-*/
     UTCValue diff_UTC_UNIX_secs = UTCinit(0x27ac6380UL, 0xfffffffdUL);
-
-/*
-**  Minimum and Maximum UNIX times (for range compares)
-*/
     UTCValue min_UNIX_time = UTCinit(0x0,0x0);
     UTCValue min_UNIX_sgn_time = UTCinit(0x80000000UL,0xffffffffUL);
-
     UTCValue max_UNIX_time = UTCinit(0xffffffffUL,0x0);
     UTCValue max_UNIX_sgn_time = UTCinit(0x7fffffffUL,0x0);
-
     int monthToDays[12] = {
 	0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334
     };

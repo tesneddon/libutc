@@ -188,5 +188,24 @@ typedef unsigned64      ExtTDF, ExtInacc;
                   ((year) % 400 == 0) ) :                               \
                 ( (year) % 4 == 0 ) )
 
+/*
+**  Differences in base times in 100ns
+*/
+    extern UTCValue diff_UNIX_UTC_ticks;
+    extern UTCValue diff_UTC_UNIX_ticks;
+
+/*
+**  Differences in base times in seconds
+*/
+    extern UTCValue diff_UTC_UNIX_secs;
+
+/*
+**  Minimum and Maximum UNIX times (for range compares)
+*/
+    extern UTCValue min_UNIX_time;
+    extern UTCValue min_UNIX_sgn_time;
+
+    extern UTCValue max_UNIX_time;
+    extern UTCValue max_UNIX_sgn_time;
 
 #endif /* utc_priv_h__ */
