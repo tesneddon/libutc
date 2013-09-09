@@ -1,6 +1,13 @@
 #ifndef utc_h__
 #define utf_h__
 
+#ifndef _UTC_T_
+#define _UTC_T_
+    typedef struct utc {
+    	char char_array[16];
+    } utc_t;
+#endif /* _UTC_T_ */
+
     enum utc_cmptype {
     	utc_lessThen,
     	utc_equalTo,
