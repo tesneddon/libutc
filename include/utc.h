@@ -38,5 +38,15 @@
 #define UTC_MAX_STR_LEN 50      /* Max length of string used by conversion
 				   routines (utc_asc...) */
 
+#ifdef __STDC__
+    int utc_gettime(utc_t *utc);
+    int utc_mkbintime(utc_t *utc, timespec_t *timesp, timespec_t *inaccsp,
+    	    	      long tdf);
+    /* utc_mkcomptime */
+#else
+    int utc_gettime();
+    int mkbintime();
+#endif /* __STDC__ */
+
 #endif /* utc_h__ */
 
