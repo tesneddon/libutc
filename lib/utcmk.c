@@ -90,7 +90,7 @@ int utc_mkbintime(utc_t *utc,
               &inaccvalue);
         UTCiAdd(&inaccvalue, ((inaccsp->tv_nsec + 99)/100),
                 &inaccvalue);
-    };
+    }
 
     emul((long)timesp->tv_sec, K_100NS_PER_SEC, &timevalue);
     UTCiAdd(&timevalue, ((timesp->tv_nsec + 50)/100), &timevalue);
@@ -141,48 +141,46 @@ int utc_mkcomptime(utc_t *utc,
     struct UTC autc;
     UTCValue ainacc;
 
-    dce_assert( (struct dce_svc_handle_s_t *)0, utc != NULL ) ;
-
-        if (inaccvalue == NULL || (IsInfiniteInacc(inaccvalue))) {
-            UTCassign (&ainacc, K_INFINITE_INACC_LO, K_INFINITE_INACC_HI);
-        } else {
-            ainacc = *inaccvalue;
-        }
+    if (inaccvalue == NULL || (IsInfiniteInacc(inaccvalue))) {
+        UTCassign (&ainacc, K_INFINITE_INACC_LO, K_INFINITE_INACC_HI);
+    } else {
+        ainacc = *inaccvalue;
+    }
 
 #if (BYTE_ORDER == LITTLE_ENDIAN)
-        autc.endian.little.flags = ((tdf / SECS_PER_MIN) >> 8) & 0xf |
-                                   (K_BINTIME_VERSION << VERSION_SHIFT) |
-                                   LITTLE_ENDIAN_FLAG;
-        autc.endian.little.tdflo = (tdf / SECS_PER_MIN) & 0xff;
+    autc.endian.little.flags = ((tdf / SECS_PER_MIN) >> 8) & 0xf |
+                               (K_BINTIME_VERSION << VERSION_SHIFT) |
+                               LITTLE_ENDIAN_FLAG;
+    autc.endian.little.tdflo = (tdf / SECS_PER_MIN) & 0xff;
 #if LONG_BIT >= 64
-        autc.endian.little.inacclo = (unsigned int) (ainacc & 0x0ffffffff);
-        autc.endian.little.inacchi = (unsigned short int)
-                                     ((ainacc & 0x0ffff00000000) >> 32);
-        autc.endian.little.time = *timevalue;
+    autc.endian.little.inacclo = (unsigned int) (ainacc & 0x0ffffffff);
+    autc.endian.little.inacchi =
+		(unsigned short int)((ainacc & 0x0ffff00000000) >> 32);
+    autc.endian.little.time = *timevalue;
 #else   /* LONG_BIT */
-        autc.endian.little.inacclo = ainacc.lo;
-        autc.endian.little.inacchi = ainacc.hi;
-        autc.endian.little.timelo = timevalue->lo;
-        autc.endian.little.timehi = timevalue->hi;
+    autc.endian.little.inacclo = ainacc.lo;
+    autc.endian.little.inacchi = ainacc.hi;
+    autc.endian.little.timelo = timevalue->lo;
+    autc.endian.little.timehi = timevalue->hi;
 #endif  /* LONG_BIT */
 #endif  /* (BYTE_ORDER == LITTLE_ENDIAN) */
 
 #if (BYTE_ORDER == BIG_ENDIAN)
-        autc.endian.big.flags = ((tdf / SECS_PER_MIN) & 0xf) |
+    autc.endian.big.flags = ((tdf / SECS_PER_MIN) & 0xf) |
                                 (K_BINTIME_VERSION << VERSION_SHIFT) |
                                 BIG_ENDIAN_FLAG;
-        autc.endian.big.tdfhi = (tdf / SECS_PER_MIN) >> 4;
+    autc.endian.big.tdfhi = (tdf / SECS_PER_MIN) >> 4;
 #if LONG_BIT >= 64
-        autc.endian.big.inacchi = (unsigned int) (ainacc & 0x0ffffffff);
-        autc.endian.big.inacclo = (unsigned short int)
-                                  ((ainacc &0x0ffff00000000) >> 32);
-        autc.endian.big.time = *timevalue;
+    autc.endian.big.inacchi = (unsigned int) (ainacc & 0x0ffffffff);
+    autc.endian.big.inacclo =
+		(unsigned short int)((ainacc &0x0ffff00000000) >> 32);
+    autc.endian.big.time = *timevalue;
 #else   /* LONG_BIT */
-        autc.endian.big.inacchi = ainacc.hi;
-        autc.endian.big.inaccmid = ainacc.lo >> 16;
-        autc.endian.big.inacclo = ainacc.lo;
-        autc.endian.big.timehi = timevalue->hi;
-        autc.endian.big.timelo = timevalue->lo;
+    autc.endian.big.inacchi = ainacc.hi;
+    autc.endian.big.inaccmid = ainacc.lo >> 16;
+    autc.endian.big.inacclo = ainacc.lo;
+    autc.endian.big.timehi = timevalue->hi;
+    autc.endian.big.timelo = timevalue->lo;
 #endif  /* LONG_BIT */
 #endif  /* (BYTE_ORDER == BIG_ENDIAN) */
 
