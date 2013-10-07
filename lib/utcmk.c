@@ -43,6 +43,8 @@
 		      long tdf);
     int utc_mkcomptime(utc_t *utc, UTCValue *timevalue, UTCValue *inaccvalue,
 		       long tdf);
+    int utc_mkgmtime(utc_t *utc, struct tm *timetm, long tns,
+                     struct tm *inacctim, long ins);
 
 /*
 **++
@@ -188,4 +190,53 @@ int utc_mkcomptime(utc_t *utc,
 
     return 0;
 } /* utc_mkcomptime */
+
+/*
+ *++
+ *  utc_mkgmtime()
+ *
+ *  Functional Description:
+ *
+ *      Converts a GMT tm struct and nanoseconds into an 128-bit UTC time.
+ *
+ *  Inputs:
+ *
+ *      timetm - pointer to tm struct with time component of utc.
+ *      tns - longword of nanosecond within second
+ *      inacctm - pointer to tm struct with inaccuracy component
+ *      ins - longword of inacc nanosecond
+ *
+ *  Implicit Inputs:
+ *
+ *
+ *  Outputs:
+ *
+ *      utc - pointer to 128-bit time to split into tm structs
+ *
+ *  Implicit Outputs:
+ *
+ *
+ *  Value Returned:
+ *
+ *      0 success, -1 failure
+ *
+ *  Side Effects:
+ *
+ *
+ *--
+ */
+int utc_mkgmtime(utc_t *utc,
+    	    	 struct tm *timetm,
+    	    	 long tns,
+    	    	 struct tm *inacctm,
+    	    	 long ins) {
 
+    UTCValue timevalue, inaccvalue, secTemp;
+
+    mergeinacc(inacctm, ins, &inaccvalue);
+
+    if (mergetime(timetm, tns, &timevalue, &secTemp) < 0)
+        return -1;
+
+    return utc_mkcomptime(utc, &timevalue, &inaccvalue, 0L);
+}
