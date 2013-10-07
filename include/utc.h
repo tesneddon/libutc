@@ -50,7 +50,9 @@
     /* utc_mkcomptime */
 #else
     int utc_gettime();
-    int mkbintime();
+    int utc_gmtime();
+    int utc_mkbintime();
+    int utc_mkgmtime();
 #endif /* __STDC__ */
 
 #endif /* utc_h__ */
