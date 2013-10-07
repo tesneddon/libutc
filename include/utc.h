@@ -43,7 +43,7 @@
     int utc_gettime(utc_t *utc);
     int utc_mkbintime(utc_t *utc, timespec_t *timesp, timespec_t *inaccsp,
     	    	      long tdf);
-    int utc_mkgmtime(utc_t *utc, struct tim *timetm, long tns,
+    int utc_mkgmtime(utc_t *utc, struct tm *timetm, long tns,
                      struct tm *inacctm, long ins);
     /* utc_mkcomptime */
 #else
