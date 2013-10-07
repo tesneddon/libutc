@@ -37,10 +37,93 @@
 **  Forward declarations
 */
 
+    int utc_bintime(timespec_t *timesp, timespec_t *inaccsp, long *tdf,
+                    utc_t *utc);
     int utc_gettime(utc_t *utc);
     int utc_gmtime(struct tm *timetm, long *tns, struct tm *inacctm, long ins,
     	    	   utc_t *utc);
 
+
+/*
+ *++
+ *  utc_bintime()
+ *
+ *  Functional Description:
+ *
+ *      Converts a 128-bit UTC time into timespecs
+ *
+ *  Inputs:
+ *
+ *      utc - pointer to 128-bit time to split into timespecs
+ *
+ *  Implicit Inputs:
+ *
+ *
+ *  Outputs:
+ *
+ *      timesp - pointer to timespec to receive time component of utc.
+ *      inaccsp - pointer to timespec to receive inaccuracy component
+ *      tdf  - pointer to int to receive the tdf
+ *
+ *  Implicit Outputs:
+ *
+ *  Outputs:
+ *
+ *      timesp - pointer to timespec to receive time component of utc.
+ *      inaccsp - pointer to timespec to receive inaccuracy component
+ *      tdf  - pointer to int to receive the tdf
+ *
+ *  Implicit Outputs:
+ *
+ *
+ *  Value Returned:
+ *
+ *      0 success, -1 failure
+ *
+ *  Side Effects:
+ *
+ *
+ *--
+ */
+int utc_bintime( timespec_t *timesp, timespec_t *inaccsp, long *tdf, utc_t *utc)
+
+{
+    UTCValue timevalue, inaccvalue;
+    unsigned long temp;
+    register int i;
+
+    if ((i = utc_comptime(&timevalue, &inaccvalue, tdf, utc)) < 0)
+        return(i);
+
+    if (inaccsp != NULL) {
+        if (IsInfiniteInacc(&inaccvalue)) {
+            inaccsp->tv_sec = inaccsp->tv_nsec = -1;
+        } else {
+            UTCiDiv(&inaccvalue, K_100NS_PER_SEC, &inaccvalue, &temp);
+            inaccsp->tv_sec = UTClow(&inaccvalue);
+            inaccsp->tv_nsec = temp*100;
+        }
+    }
+    UTCadd(&timevalue, &diff_UTC_UNIX_ticks, &timevalue);
+    UTCiDiv(&timevalue, K_100NS_PER_SEC, &timevalue, &temp);
+    if ((long) temp < 0) {
+        temp += K_100NS_PER_SEC;
+        (UTClow(&timevalue))--;
+    }
+    if (timesp != NULL)
+    {
+        timesp->tv_sec = UTClow(&timevalue);
+        timesp->tv_nsec = temp*100;
+    }
+
+    if (IsUTCgt(&timevalue, &max_UNIX_time) ||
+        IsUTClt(&timevalue, &min_UNIX_time)) {
+        return(-1);
+    };
+
+    return(0);
+
+} /* utc_bintime() */
 
 int utc_gettime(utc_t *utc) {
 

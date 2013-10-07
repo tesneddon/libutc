@@ -40,6 +40,8 @@
 				   routines (utc_asc...) */
 
 #ifdef __STDC__
+    int utc_bintime(timespec_t *timesp, timespec_t *inaccsp, long *tdf,
+    	    	    utc_t *utc);
     int utc_gettime(utc_t *utc);
     int utc_gmtime(struct tm *timetm, long *tns, struct tm *inacctm, long ins,
                    utc_t *utc);
@@ -49,6 +51,7 @@
                      struct tm *inacctm, long ins);
     /* utc_mkcomptime */
 #else
+    int utc_bintime();
     int utc_gettime();
     int utc_gmtime();
     int utc_mkbintime();
